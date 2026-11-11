@@ -1,0 +1,361 @@
+<title>حكاية نور</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
+<style>
+/* Layout concept: a dark room lit by one warm light that follows the viewer (Nour = light).
+   Photos sit in a two-column wall, small paper notes are pinned between them, the letter closes the page on paper. */
+:root{
+  --bg:#12070b;
+  --bg-2:#1b0b12;
+  --text:#f6e9e4;
+  --muted:#c3a3a9;
+  --glow:#f7c98b;
+  --rose:#e9a2ad;
+  --paper:#f3e6db;
+  --ink:#3b1822;
+  --line:rgba(247,201,139,.2);
+  --f-display:'Aref Ruqaa','Noto Naskh Arabic',serif;
+  --f-body:'Cairo','Segoe UI',Tahoma,sans-serif;
+  --f-latin:'Cormorant Garamond',Georgia,serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--f-body);
+  font-size:1.05rem;
+  line-height:1.9;
+  direction:rtl;
+  text-align:start;
+  padding-block:0 3rem;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  overflow-x:hidden;
+}
+.glow{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(560px circle at var(--mx,50%) var(--my,22%),rgba(247,201,139,.16),rgba(233,162,173,.05) 45%,transparent 70%)}
+main{position:relative;z-index:1;max-width:1000px;margin-inline:auto}
+h1,h2,h3,p,figure,ol,ul{margin:0}
+h2{font-family:var(--f-display);font-weight:700;font-size:clamp(2rem,7.5vw,3.3rem);line-height:1.35;text-wrap:balance;color:var(--text)}
+.eyebrow{font-size:.85rem;color:var(--glow);font-weight:600}
+
+/* hero */
+.hero{padding-block:clamp(2.5rem,9vh,5rem) clamp(2rem,6vh,3.5rem);display:flex;flex-direction:column;gap:1rem}
+.latin{font-family:var(--f-latin);font-style:italic;font-size:1.25rem;color:var(--rose);direction:ltr;text-align:right}
+.name{font-family:var(--f-display);font-weight:700;font-size:clamp(7.5rem,38vw,17rem);line-height:1.15;color:var(--glow);
+  text-shadow:0 0 36px rgba(247,201,139,.5),0 0 110px rgba(255,160,120,.28);animation:breathe 5s ease-in-out infinite}
+@keyframes breathe{50%{text-shadow:0 0 52px rgba(247,201,139,.7),0 0 150px rgba(255,160,120,.4)}}
+.lede{max-width:34ch;font-size:1.2rem;color:var(--text)}
+.months{list-style:none;padding:0;margin-top:1.4rem;display:flex;justify-content:space-between;gap:2px;position:relative}
+.months::before{content:"";position:absolute;inset-inline:6%;top:7px;height:1px;background:linear-gradient(90deg,var(--line),var(--glow),var(--line))}
+.months li{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:.5rem;font-size:clamp(.6rem,2.7vw,.82rem);color:var(--muted);position:relative}
+.months i{width:15px;height:15px;border-radius:50%;background:var(--bg);border:1px solid var(--line);display:block}
+.months li.on i{background:var(--glow);border-color:var(--glow);box-shadow:0 0 14px rgba(247,201,139,.7)}
+.months li.on{color:var(--text)}
+.months li.cur i{transform:scale(1.35);box-shadow:0 0 0 5px rgba(247,201,139,.18),0 0 22px rgba(247,201,139,.9)}
+.cap{font-size:.85rem;color:var(--muted)}
+
+/* chapters */
+.chap{padding-block:clamp(2.5rem,7vw,4.5rem);border-top:1px solid var(--line);display:flex;flex-direction:column;gap:1.6rem}
+.chap header{display:flex;flex-direction:column;gap:.3rem}
+.chap .body{max-width:44ch;color:var(--text)}
+.chap .body+.body{margin-top:.8rem}
+
+/* plates: every photo is a framed print with a caption under it */
+.plates{display:grid;grid-template-columns:minmax(0,1fr);gap:3rem 2rem}
+@media(min-width:820px){.plates{grid-template-columns:repeat(2,minmax(0,1fr));gap:4.5rem 3.5rem;align-items:start}.plate:nth-child(even){margin-top:4rem}}
+.plate{display:flex;flex-direction:column;align-items:center;gap:1.1rem;min-width:0}
+.plate.wide{grid-column:1/-1}
+.plate.wide:nth-child(even){margin-top:0}
+.ph{position:relative;width:fit-content;max-width:100%;padding:9px;border-radius:16px;cursor:zoom-in;outline-offset:4px;
+  background:linear-gradient(150deg,rgba(247,201,139,.2),rgba(233,162,173,.07) 55%,rgba(247,201,139,.12));
+  border:1px solid rgba(247,201,139,.3);
+  box-shadow:0 0 50px -14px rgba(247,201,139,.28),0 26px 44px -22px rgba(0,0,0,.9)}
+.ph img{display:block;width:auto;height:auto;max-width:100%;max-height:74vh;border-radius:9px;transition:filter .9s ease,transform .9s ease}
+.plate.wide .ph img{max-height:62vh}
+.js .ph:not(.in) img{filter:brightness(.62) saturate(.8)}
+.ph:focus-visible{outline:2px solid var(--glow)}
+.say{font-family:var(--f-display);font-size:clamp(1.15rem,4.3vw,1.4rem);line-height:1.9;text-align:center;max-width:30ch;color:var(--text);text-wrap:balance}
+.say::before{content:"";display:block;width:36px;height:1px;background:var(--glow);margin:0 auto .8rem}
+
+/* notes */
+.note{position:relative;background:var(--paper);color:var(--ink);padding:1.5rem 1.15rem 1.2rem;border-radius:3px;
+  transform:rotate(var(--r,-1deg));box-shadow:0 16px 30px -14px rgba(0,0,0,.75);font-family:var(--f-display);font-size:1.18rem;line-height:1.85}
+.note::before{content:"";position:absolute;top:-9px;inset-inline-start:50%;width:64px;height:18px;margin-inline-start:-32px;
+  background:rgba(233,162,173,.55);transform:rotate(2deg);border-radius:2px}
+.note small{display:block;font-family:var(--f-body);font-size:.72rem;color:rgba(59,24,34,.6);margin-bottom:.35rem}
+.note.solo{max-width:420px}
+
+/* name letters */
+.letters{list-style:none;padding:0;display:flex;flex-direction:column}
+.letters li{display:grid;grid-template-columns:5.2rem 1fr;gap:1rem;align-items:center;padding-block:1rem;border-bottom:1px solid var(--line)}
+.letters li:last-child{border-bottom:0}
+.letters b{font-family:var(--f-display);font-weight:700;font-size:4.6rem;line-height:1;color:var(--glow);text-align:center;text-shadow:0 0 28px rgba(247,201,139,.45)}
+.letters span{min-width:0}
+.letters strong{display:block;font-family:var(--f-display);font-size:1.35rem;color:var(--rose);font-weight:700}
+
+/* video */
+.reel{width:100%;max-width:560px}
+.reel video{display:block;width:100%;aspect-ratio:4/3;background:#000;border-radius:12px;
+  box-shadow:0 0 0 1px rgba(247,201,139,.25),0 0 60px -10px rgba(247,201,139,.35),0 24px 44px -20px #000}
+
+/* letter */
+.letter{background:var(--paper);color:var(--ink);max-width:640px;border-radius:6px;padding:clamp(1.6rem,6vw,2.8rem) clamp(1.2rem,5vw,2.4rem);
+  display:flex;flex-direction:column;gap:1.15rem;box-shadow:0 0 90px -20px rgba(247,201,139,.45),0 30px 60px -30px #000;position:relative}
+.letter p{font-size:1.1rem;line-height:2}
+.letter .big{font-family:var(--f-display);font-weight:700;font-size:clamp(1.7rem,6.5vw,2.3rem);line-height:1.6;text-wrap:balance}
+.letter .ask{font-weight:700}
+.letter .dua{font-family:var(--f-display);font-size:1.45rem;line-height:1.9;color:#7a2236}
+.letter .sign{font-family:var(--f-display);font-size:1.5rem;color:var(--ink);margin-top:.4rem}
+.end{display:flex;flex-direction:column;gap:.4rem;padding-top:2rem}
+.end .name{font-size:clamp(4rem,18vw,7rem);color:var(--glow);animation:none}
+.end p{color:var(--muted);font-size:.9rem}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(10,3,6,.94);display:flex;align-items:center;justify-content:center;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));cursor:zoom-out}
+.lb[hidden]{display:none}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 0 80px -10px rgba(247,201,139,.35)}
+
+@media(prefers-reduced-motion:reduce){.name{animation:none}.ph img{transition:none}}
+</style>
+
+<div class="glow" aria-hidden="true"></div>
+<main>
+
+<section class="hero">
+  <p class="latin">Nour, since March 2026</p>
+  <h1 class="name">نور</h1>
+  <p class="lede">حكاية صغيرة عن أجمل حاجة حصلتلي. من مارس ٢٠٢٦ لحد النهارده.</p>
+  <ol class="months" id="months" aria-label="الشهور من مارس ٢٠٢٦">
+    <li class="on"><i></i>مارس</li>
+    <li class="on"><i></i>أبريل</li>
+    <li class="on"><i></i>مايو</li>
+    <li class="on"><i></i>يونيو</li>
+    <li class="on"><i></i>يوليو</li>
+    <li class="on"><i></i>أغسطس</li>
+    <li class="on"><i></i>سبتمبر</li>
+    <li class="on"><i></i>أكتوبر</li>
+    <li class="on cur"><i></i>نوفمبر</li>
+  </ol>
+  <p class="cap">كل نقطة شهر عدّى معاكي. والباقي لسه جاي.</p>
+</section>
+
+<section class="chap">
+  <header>
+    <p class="eyebrow">مارس ٢٠٢٦</p>
+    <h2>اللي بدأ في الشاويش</h2>
+  </header>
+  <p class="body">في مارس ٢٠٢٦ اتعرفنا على بعض. كنا بنروح الشاويش سوا ونقعد نذاكر هناك، وكل ساعة مذاكرة كنت بتعلق بيكي فيها أكتر.</p>
+  <p class="body">ومن وقتها مبقاش فيه مارس عادي.</p>
+  <aside class="note solo" style="--r:-1.6deg"><small>نوتة صغيرة</small>كنا بنذاكر، وأنا كنت بذاكر ملامحك أكتر من الكتب.</aside>
+  <div class="plates">
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/a1.jpg" width="553" height="982" alt="نور" loading="lazy"></figure>
+      <p class="say">الشمس طالعة والسما صافية، بس إنتي أنوّر من الاتنين.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/a2.jpg" width="719" height="1280" alt="نور وأنا" loading="lazy"></figure>
+      <p class="say">حتى في الضلمة، وشّك هو اللي بينوّر الصورة.</p>
+    </div>
+    <div class="plate wide">
+      <figure class="ph" tabindex="0"><img src="img/a3.jpg" width="570" height="299" alt="نور وأنا" loading="lazy"></figure>
+      <p class="say">قريبين كده... وده أحسن مكان في الدنيا عندي.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b16.jpg" width="750" height="1275" alt="نور وأنا" loading="lazy"></figure>
+      <p class="say">حتى وسط المذاكرة، كان دايمًا فيه وقت أبصلك وأتصور معاكي.</p>
+    </div>
+  </div>
+</section>
+
+<section class="chap">
+  <header>
+    <p class="eyebrow">من اسمها</p>
+    <h2>اسمك مش بس اسم</h2>
+  </header>
+  <p class="body">نور. تلات حروف، وكل حرف فيهم فيه حاجة منك.</p>
+  <ul class="letters" style="padding:0">
+    <li><b>ن</b><span><strong>نظرتك</strong>بتبصي فبنسى أنا كنت هقول إيه.</span></li>
+    <li><b>و</b><span><strong>وشّك</strong>قمر. والقمر نفسه لو شافك هيستغرب.</span></li>
+    <li><b>ر</b><span><strong>روحك</strong>أي مكان بتدخليه بيبقى أنور.</span></li>
+  </ul>
+</section>
+
+<section class="chap">
+  <header>
+    <p class="eyebrow">عينيكي</p>
+    <h2>العيون عمرها ما بتكدب</h2>
+  </header>
+  <p class="body">أنا بتكلم كتير، بس قدام عينيكي بسكت.</p>
+  <aside class="note solo" style="--r:1.4deg"><small>نوتة صغيرة</small>عينيكي أول حاجة شفتها، وآخر حاجة بنساها. لما بتبصيلي بحس إن كل كلام الدنيا زيادة.</aside>
+  <div class="plates">
+    <div class="plate wide">
+      <figure class="ph" tabindex="0"><img src="img/b09.jpg" width="728" height="276" alt="عيون نور وعيوني" loading="lazy"></figure>
+      <p class="say">عينيكي قالتلي كل حاجة قبل ما تتكلمي. وفعلًا، العيون عمرها ما بتكدب.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b01.jpg" width="569" height="1011" alt="نور" loading="lazy"></figure>
+      <p class="say">مهما بصيت للصورة دي، مبشبعش.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b04.jpg" width="524" height="930" alt="نور" loading="lazy"></figure>
+      <p class="say">الأحمر عليكي حاجة تانية، وفي عينيكي حكاية كاملة.</p>
+    </div>
+  </div>
+</section>
+
+<section class="chap">
+  <header>
+    <p class="eyebrow">شكلك</p>
+    <h2>زي القمر</h2>
+  </header>
+  <p class="body">مش مجاملة. أي صورة ليكي هنا تتحط في أي مكان وتنوّره.</p>
+  <aside class="note solo" style="--r:-1.2deg"><small>نوتة صغيرة</small>القمر بياخد نوره من الشمس، وإنتي نورك من جواكي.</aside>
+  <div class="plates">
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b03.jpg" width="570" height="1015" alt="نور" loading="lazy"></figure>
+      <p class="say">بوزك الصغير ده بينسّيني أي زعل في ثانية.</p>
+    </div>
+    <div class="plate wide">
+      <figure class="ph" tabindex="0"><img src="img/b06.jpg" width="593" height="451" alt="نور" loading="lazy"></figure>
+      <p class="say">ضحكتك دي أغلى حاجة عندي. والكاميرا القديمة نفسها مقدرتش تخبي حلاوتها.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b08.jpg" width="587" height="1044" alt="نور" loading="lazy"></figure>
+      <p class="say">حتى في المراية، إنتي الأحلى في المكان كله.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b11.jpg" width="576" height="1021" alt="نور" loading="lazy"></figure>
+      <p class="say">قاعدة ببساطة كده، وبتخلي المكان كله أحلى.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b13.jpg" width="641" height="1093" alt="نور" loading="lazy"></figure>
+      <p class="say">الشمس والسما والرمل، وكان ناقصهم إنتي.</p>
+    </div>
+  </div>
+</section>
+
+<section class="chap">
+  <header>
+    <p class="eyebrow">لحظاتنا</p>
+    <h2>حاجات اتحركت</h2>
+  </header>
+  <p class="body">فيه لحظات الصورة لوحدها مش كفاية فيها، فحطيت فيديو.</p>
+  <div class="plates">
+  <div class="plate wide">
+    <div class="reel">
+      <video controls playsinline preload="metadata" poster="vid/poster.jpg" src="vid/clip.mp4"></video>
+    </div>
+    <p class="say">الفيديو ده اخترته علشانك. فيه حاجة منه بتفكرني بينا.</p>
+  </div>
+    <div class="plate wide">
+      <figure class="ph" tabindex="0"><img src="img/b05.jpg" width="1280" height="742" alt="نور وأنا" loading="lazy"></figure>
+      <p class="say">الشارع ساكت والليل هادي، وضحكتنا مالية المكان.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b07.jpg" width="706" height="1208" alt="نور وأنا" loading="lazy"></figure>
+      <p class="say">يوم عادي بقى مش عادي، لأنك فيه.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b10.jpg" width="975" height="1300" alt="نور وأنا" loading="lazy"></figure>
+      <p class="say">إيدك في إيدي، والدنيا حواليا بتهدى.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b12.jpg" width="750" height="1276" alt="نور وأنا" loading="lazy"></figure>
+      <p class="say">قلب على وشنا، وقلبي كله عندك.</p>
+    </div>
+  </div>
+</section>
+
+<section class="chap">
+  <header>
+    <p class="eyebrow">إحنا</p>
+    <h2>وإحنا مع بعض</h2>
+  </header>
+  <p class="body">الصور دي مش هتحكي كل حاجة، بس بتحكي إننا كنا مبسوطين.</p>
+  <aside class="note solo" style="--r:1.8deg"><small>نوتة صغيرة</small>قهوة وبيتزا وإيدينا بتعمل قلب. مش محتاج أكتر من كده.</aside>
+  <div class="plates">
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b14.jpg" width="745" height="1280" alt="نور وأنا" loading="lazy"></figure>
+      <p class="say">قاعدين جنب بعض، وده كفاية.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b15.jpg" width="750" height="1244" alt="قهوة وبيتزا وإيدينا بتعمل قلب" loading="lazy"></figure>
+      <p class="say">قهوة وبيتزا وقلب بإيدينا. أبسط حاجة، وأحلى حاجة.</p>
+    </div>
+    <div class="plate">
+      <figure class="ph" tabindex="0"><img src="img/b02.jpg" width="750" height="1233" alt="نور وأنا" loading="lazy"></figure>
+      <p class="say">حتى وإنتي بتهزّري، بحبك أكتر.</p>
+    </div>
+  </div>
+</section>
+
+<section class="chap">
+  <header>
+    <p class="eyebrow">آخر الكلام</p>
+    <h2>الرسالة</h2>
+  </header>
+  <article class="letter">
+    <p class="big">إنتي أجمل حاجة حصلت في حياتي، بجد. 🤍</p>
+    <p>وأجمل حاجة ممكن الواحد يشوفها. حياتي اتغيرت أوي بعد ما شوفتك، وبحب كل لحظة بينا. ✨</p>
+    <p class="ask">سألتيني كام مرة: ليه لسه مكمّل معاكي على الرغم من اللي بتعمليه فيا؟ 🥹</p>
+    <p>هقولك. اللي إنتي عملتيه معايا، ووقفتك جنبي في لحظة الكل فيها سابني، دي عندي بالدنيا كلها. غير حنيتك عليا، ونعومتك اللي ماتتوصفش. 🌹</p>
+    <p>أوقات بتجرحيني بالكلام، وكلامك بيوجعني أوي. بس برضه عارف إنك مضايقة، واللي أنا عملته فيكي كان صعب أوي كمان، ومع ذلك اخترتي ما تسيبينيش. دا اللي بيخليني دايمًا شايفلك عذر لكل حاجة بتعمليها. 💫</p>
+    <p class="dua">يارب تكون حياتك أجمل، وربنا يبعد عنك كل حاجة وحشة وتضايقك، ويجعل حياتك كلها زي اسمك. نور ✨🌙</p>
+    <p class="sign">ليكي يا نور 🤍</p>
+  </article>
+  <div class="end">
+    <p class="name" aria-hidden="true">نور</p>
+    <p>اتعمل علشانك، نوفمبر ٢٠٢٦.</p>
+  </div>
+</section>
+
+</main>
+
+<div class="lb" id="lb" hidden><img alt=""></div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  root.classList.add('js');
+
+  // months: light the dots up to the current month (March 2026 = first dot)
+  try{
+    var n=new Date(), e=(n.getFullYear()-2026)*12+(n.getMonth()-2);
+    var items=document.querySelectorAll('#months li'), cur=Math.max(0,Math.min(e,items.length-1));
+    items.forEach(function(li,i){li.classList.toggle('on',i<=cur);li.classList.toggle('cur',i===cur)});
+  }catch(_){}
+
+  // photos lift from dim to full light as they scroll into view
+  var figs=document.querySelectorAll('.ph');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.15});
+    figs.forEach(function(f){io.observe(f)});
+  }else{figs.forEach(function(f){f.classList.add('in')})}
+
+  // lightbox
+  var lb=document.getElementById('lb'), lbi=lb.querySelector('img');
+  function open(f){var im=f.querySelector('img');lbi.src=im.currentSrc||im.src;lbi.alt=im.alt;lb.hidden=false}
+  function close(){lb.hidden=true;lbi.removeAttribute('src')}
+  figs.forEach(function(f){
+    f.addEventListener('click',function(){open(f)});
+    f.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(f)}});
+  });
+  lb.addEventListener('click',close);
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)close()});
+
+  // the light: follows the pointer, or drifts with the scroll on touch screens
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var tx=50,ty=22,cx=50,cy=22,fine=matchMedia('(pointer:fine)').matches;
+  if(fine){addEventListener('pointermove',function(e){tx=e.clientX/innerWidth*100;ty=e.clientY/innerHeight*100})}
+  else{addEventListener('scroll',function(){var y=scrollY;tx=50+32*Math.sin(y/520);ty=28+20*Math.cos(y/380)},{passive:true})}
+  (function loop(){
+    cx+=(tx-cx)*.06;cy+=(ty-cy)*.06;
+    root.style.setProperty('--mx',cx.toFixed(2)+'%');root.style.setProperty('--my',cy.toFixed(2)+'%');
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
